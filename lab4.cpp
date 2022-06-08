@@ -6,37 +6,33 @@ void instructions()
 	cout << "Enter the name of the output file, the year for which you wish to generate the calendar, and the day of the week that January is first on!\n";
 }
 
-void is_leap()
+
+
+bool is_leap(int a_year)
 {
-	int year;
-	cout << "Enter to check if leap year" << endl;
-	cin >> year;
-	if (year % 4 == 0)
+	if (a_year % 4 == 0)
 	{
-		if (year % 100 == 0)
+		if (a_year % 100 == 0)
 		{
-			if (year % 400 == 0)
+			if (a_year % 400 == 0)
 			{
-				cout << "It is a leap year!" << endl;
+				return true; 
 			}
-			else
+			else 
 			{
-				cout << "Not a leap year!" << endl;
+				return false; 
 			}
+
 		}
 		else
 		{
-			cout << "Leap year!" << endl;
+			return true; 
 		}
+	}else{
+		return false;
 
-	}
-	else
-	{
-		cout << "Not a leap year" << endl;
 	}
 }
-
-
 
 
 
@@ -48,7 +44,7 @@ void is_leap()
 int main()
 {
 	instructions();
-	is_leap();
+	cout << is_leap(1991);
 
-	return -1;
+	return 0;
 }
