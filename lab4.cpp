@@ -1,46 +1,44 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
 
-//void instructions()
-//{
-//	cout << "Enter the name of the output file, the year for which you wish to generate the calendar, and the day of the week that January is first on! 004\n";
-//	
-//}
-//
-//char GetFileName()
-//{
-//	cout << "Enter the name of the output file:\n";
-//	char num{};
-//	std::cin >> num;
-//
-//	return num;
-//
-//}
-//
-//int GetYear()
-//{
-//	cout << "Enter the year for which you wish to generate the calendar:\n";
-//	int num{};
-//	std::cin >> num;
-//
-//	return num;
-//
-//}
-//
-//int GetDay()
-//{
-//	cout << "Enter the day of the week that January is first on:\n";
-//	int num{};
-//	std::cin >> num;
-//
-//	return num;
-//
-//}
-//
-//
-//
-//
-//
+void instructions()
+{
+	cout << "Enter the name of the output file, the year for which you wish to generate the calendar, and the day of the week that January is first on!\n";
+	cout << endl;
+	
+}
+
+char GetFileName()
+{
+	cout << "Enter the name of the output file:\n";
+	char num{};
+	std::cin >> num;
+
+	return num;
+
+}
+
+int getyear()
+{
+	cout << "Enter the year for which you wish to generate the calendar:\n";
+	int num{};
+	std::cin >> num;
+
+	return num;
+
+}
+
+int getday()
+{
+	cout << "Enter the day of the week that January is first on:\n";
+	int num{};
+	std::cin >> num;
+
+	return num;
+
+}
+
 	bool is_leap(int a_year)
 	{
 	if (a_year % 4 == 0)
@@ -67,7 +65,6 @@ using namespace std;
 	}
 	}
 
-
 	int number_of_days_in_a_month(int a_month)
 	{
 		if (a_month == 0 || a_month == 2 || a_month == 4 || a_month == 7 || a_month == 9 || a_month == 11)
@@ -87,84 +84,71 @@ using namespace std;
 		return(months[monthNumber]);
 	}
 
-	void getMonthlyCalendar(int monthNumber)
+	void printCalendar(int year, int iday, bool leap)
 	{
-		cout << getMonthName(monthNumber);
-		cout << endl; 
-		cout << "Mon Tue Wed Thu Fri Sat Sun";
-		cout << endl;
+		// prints calendar title
+		std::cout << "           Calendar of " << year << std::endl;
+		
+		int days;
 
-		const int weeks = 5;
-		const int days_per_weeks = 7;
-		int arr[weeks][days_per_weeks];
-		int day_of_month = 1;
+		int current = iday;
 
-		number_of_days_in_a_month(monthNumber);
-		for (int i = 0; i < weeks; i++)
+		// # of days in month, leap year accounted for.
+		for (int i = 0; i < 12; i++)
 		{
-			for (int j = 0; j < days_per_weeks && day_of_month <= number_of_days_in_a_month(monthNumber); j++)
+			days = number_of_days_in_a_month(i);
+			if (i == 1 && leap == 1)
 			{
-				arr[i][j] = day_of_month;
-				day_of_month = day_of_month + 1;
+				days = days - 1;
 			}
-		}
 
-		int counter = 1;
-		for (int i = 0; i < weeks; i++)
-		{
-			for (int j = 0; j < days_per_weeks && counter <= number_of_days_in_a_month(monthNumber); j++)
-			{
-				cout << arr[i][j] << " ";
-				counter++;
-			}
 			cout << endl;
-		}
-	}
+			cout << "  " << getMonthName(i) << endl;
+			
+			// days of week
+			cout << "  Sun  Mon  Tue  Wed  Thu  Fri  Sat\n";
+			int k;
+			for (k = 0; k < current; k++)
+				cout << ("     ");
 
+			for (int j = 1; j <= days; j++)
+			{
+				if (j < 10)
+				{
+					std::cout << "  " << j << "  ";
+				}
+				else
+				{
+					std::cout << "  " << j << " ";
+				}
+
+				if (++k > 6)
+				{
+					k = 0;
+					std::cout << "\n";
+				}
+			}
+
+			if (k)
+				std::cout << "\n";
+
+			current = k;
+		}
+
+		return;
+	}
+				
 	
 	int main()
 	{
-		/*instructions();
-		getfilename();
-		getyear();
-		getday();*/
-		/*cout << is_leap(2200);*/
-		getMonthlyCalendar(0);
-		
-		
 
-
-		
-		/*cout << "Mon Tue Wed Thu Fri Sat Sun"; 
-		cout << endl; 
-
-		const int weeks = 5;
-		const int days_per_weeks = 7;
-		int arr[weeks][days_per_weeks];
-		int day_of_month = 1;
-
-		number_of_days_in_a_month(1);
-		for (int i = 0; i < weeks; i++)
-		{
-			for (int j = 0; j < days_per_weeks && day_of_month <= number_of_days_in_a_month(1); j++)
-			{
-				arr[i][j] = day_of_month;
-				day_of_month = day_of_month + 1;
-			}
-		}
-
-		int counter = 1;
-		for (int i = 0; i < weeks; i++)
-		{
-			for (int j = 0; j < days_per_weeks && counter <= number_of_days_in_a_month(1); j++)
-			{
-				cout << arr[i][j] << " ";
-				counter++;
-			}
-		   cout << endl;
-		}*/
-
-			return 0;
-
+		instructions();
+		// getfilename();
+		int year = getyear();
+		int day = getday();
+		//  is_leap(2200);
+		printCalendar(year, day, is_leap(year));
+	
+		return 0;
 	}
 
