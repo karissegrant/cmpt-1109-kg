@@ -1,4 +1,5 @@
 #include <iostream>
+
 using namespace std;
 
 // takes 12 digits and return the check digit
@@ -64,16 +65,58 @@ int main()
 }
 
 int main()
+
+int choice;
+int i;
+int number_size = 0;
+int arr[20]
+
+do
 {
-    int barcode[20] = {};
-    int userinput;
-    cout << "1. EAN-8 \n" << "2. UPC-A \n" << "3. EAN-13 \n" << "4. EAN-14 \n" << "5. SSCC \n";
+    cout << endl; 
+    cout << "---- Check Digit Calculator ----\n     ";
+    cout <<"1. EAN-8 \n" << "2. UPC-A \n" << "3. EAN-13 \n" << "4. EAN-14 \n" << "5. SSCC \n";
     cout << "Choose your product code type: " << endl;
-    cin >> userinput;
-    if (userinput == 1) 
+    cin >> choice;
+
+    if (choice == 1)
     {
-        cout << "Enter the first 7 digits of your product code!" << endl;
-        for (int i = 0; i < 7; i++)
-            cin >> barcode[i];
-        compute_check_digit(barcode, 7);
+        cout << "Please enter the first 7 digits!\n";
+        number_size = 7;
     }
+
+    else if (choice == 2)
+    {
+        cout << "Please enter the first 12 digits!\n";
+        number_size = 11;
+    }
+
+    else if (choice == 3)
+    {
+        cout << "Please enter the first 12 digits!\n";
+        number_size = 12;
+    }
+
+    else if (choice == 4)
+    {
+        cout << "Please enter the first 13 digits!\n";
+        number_size = 13;
+    }
+
+    else if (choice == 5)
+    {
+        cout << "Please enter the first 17 digits!\n";
+        number_size = 17;
+    }
+
+    else if (choice > 5)
+    {
+        cout << "Error:" << choice << "is an invalid option. Try again!\n";
+        break;
+    }
+
+
+
+}
+
+return 0; 
